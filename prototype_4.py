@@ -38,10 +38,10 @@ def think_and_stream(
     mode=None,
     display_time=CFG.DISPLAY_TIME,
 ):
-    gray_scale = [
-        "#cccccc", "#bfbfbf", "#b3b3b3", "#a6a6a6", "#999999",
-        "#8c8c8c", "#808080", "#8c8c8c", "#999999", "#a6a6a6",
-        "#b3b3b3", "#bfbfbf"
+    red_scale = [
+        "#ffcccc", "#ffbfbf", "#ffb3b3", "#ffa6a6", "#ff9999",
+        "#ff8c8c", "#ff8080", "#ff8c8c", "#ff9999", "#ffa6a6",
+        "#ffb3b3", "#ffbfbf"
     ]
 
     start = time.time()
@@ -52,7 +52,7 @@ def think_and_stream(
             elapsed = time.time() - start
             if elapsed >= delay_seconds:
                 break
-            color = gray_scale[idx % len(gray_scale)]
+            color = red_scale[idx % len(red_scale)]
             idx += 1
             placeholder.markdown(
                 f"<span style='color:{color}; font-style:italic;'>Thinking</span>",
@@ -60,11 +60,12 @@ def think_and_stream(
             )
             time.sleep(0.1)
 
-        thought_header = (
-            "<div style='color:#999; font-style:italic; margin-bottom:10px;'>"
-            f"Thought for {display_time:.1f} s"
-            "</div>"
-        )
+            thought_header = (
+                "<div style='color:#ff8080; font-style:italic; margin-bottom:10px;'>"
+                f"Thought for {int(display_time)} s"
+                "</div>"
+            )
+
     elif mode == "No Cues (custom)" or CFG.DEV_MODE is False:
         thought_header = ""
         time.sleep(delay_seconds)
